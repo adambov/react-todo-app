@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './App.css';
-import Form from './components/form';
+import Form from './components/Form';
+import Tasklist from './components/Tasklist';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = (task) => {
-    console.log(task)
+    setTasks(prevState => [...prevState, task])
   }
 
   return (
@@ -15,6 +16,7 @@ function App() {
         <h1>My Todo List</h1>
       </header>
       <Form addTask={addTask}/>
+      {tasks && <Tasklist tasks={tasks}/>}
     </div>
   );
 }

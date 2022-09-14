@@ -1,11 +1,16 @@
 import { useState } from "react";
 
-const Form = () => {
+const Form = ({addTask}) => {
 
 const [task, setTask] = useState('');
 
     const handleFormSubmit = (e) =>{
         e.preventDefault();
+        addTask({
+            name: task,
+            checked: false,
+            id: Date.now()
+        })
         setTask('')
     }
 
