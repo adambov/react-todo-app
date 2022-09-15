@@ -24,13 +24,25 @@ function App() {
     setTodos(updatedTodos)
   }
 
+  const completeTodo = (id) => {
+    let updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed
+
+      }
+      return todo
+    })
+    setTodos(updatedTodos)
+  }
+
   return (
     <div className="todo-app">
       <header><h1>Todo List</h1></header>
       <Todoform addTodo={addTodo}/>
+      <hr className='separator'/>
       {todos.map((todo) => {
         return (
-            <Todoitem removeTodo={removeTodo} todo={todo} key={todo.id}/>
+            <Todoitem removeTodo={removeTodo} completeTodo={completeTodo} todo={todo} key={todo.id}/>
         )
         
       })}
