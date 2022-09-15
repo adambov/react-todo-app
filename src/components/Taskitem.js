@@ -1,10 +1,9 @@
-
-const Taskitem = ({task}) => {
+const Todoitem = (props) => {
     return (
-        <div>
-            {task.name}
+        <div className="todo-row">
+              {props.todo.text}  
         </div>
     )
 }
 
-export default Taskitem
+export default Todoitem

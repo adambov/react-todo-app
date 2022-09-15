@@ -1,22 +1,34 @@
 import { useState } from 'react';
 import './App.css';
-import Form from './components/Form';
+import Todoform from './components/Todoform';
 import Tasklist from './components/Tasklist';
+import Todoitem from './components/Taskitem';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [todos, setTodos] = useState([])
+  
+  const addTodo = (text) => {
+      let id = 1;
+      if (todos.length > 0) {
+        id = todos[0].id + 1
+      }
 
-  const addTask = (task) => {
-    setTasks(prevState => [...prevState, task])
+      let todo = {id: id, text: text, completed: false}
+      let newTodos = [todo, ...todos]
+      console.log(newTodos)
+      setTodos(newTodos)
   }
 
   return (
-    <div className="container">
-      <header>
-        <h1>My Todo List</h1>
-      </header>
-      <Form addTask={addTask}/>
-      {tasks && <Tasklist tasks={tasks}/>}
+    <div className="todo-app">
+      <header><h1>Todo List</h1></header>
+      <Todoform addTodo={addTodo}/>
+      {todos.map((todo) => {
+        return (
+            <Todoitem todo={todo} key={todo.id}/>
+        )
+        
+      })}
     </div>
   );
 }
