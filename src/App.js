@@ -22,7 +22,7 @@ function App() {
   const removeTodo = (id) => {
     let updatedTodos = [...todos].filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
-  }
+  };
 
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
