@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Todoform from './components/Todoform';
-import Tasklist from './components/Tasklist';
 import Todoitem from './components/Taskitem';
 
 function App() {
@@ -18,6 +17,16 @@ function App() {
       console.log(newTodos)
       setTodos(newTodos)
   }
+
+  useEffect (() => {
+    fetch('http://localhost:3500/todos')
+    .then(res => {
+      return res.json()
+    })
+    .then((data) =>{
+      setTodos(data);
+    });
+  }, []);
 
   const removeTodo = (id) => {
     let updatedTodos = [...todos].filter((todo) => todo.id !== id)
@@ -42,7 +51,7 @@ function App() {
       <hr className='separator'/>
       {todos.map((todo) => {
         return (
-            <Todoitem removeTodo={removeTodo} completeTodo={completeTodo} todo={todo} key={todo.id}/>
+        <Todoitem removeTodo={removeTodo} completeTodo={completeTodo} todo={todo} key={todo.id}/>
         )
         
       })}
